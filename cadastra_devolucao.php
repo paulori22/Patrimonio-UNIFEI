@@ -21,7 +21,7 @@ if($conn->connect_error){
 }
 
 
-            echo("<script type='text/javascript'> alert('Item DEvolvido!'); location.href='pagina_principal.php';</script>");
+            echo("<script type='text/javascript'> alert('Item Devolvido!'); location.href='pagina_principal.php';</script>");
 
             mysqli_query($conn, "update emprestimo set emprestado = 0 , condicoes= '$condicoes' WHERE id_patrimonio=$x  ");
 

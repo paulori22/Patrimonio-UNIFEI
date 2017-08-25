@@ -4,7 +4,13 @@
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-indigo w3-hide-large w3-closenav w3-large">Fechar <i class="fa fa-remove"></i></a>
     <a href="emprestimo.php" class="w3-bar-item w3-button"><b>Emprestimo</b></a>
     <a href="devolucao.php" class="w3-bar-item w3-button"><b>Devolução</b></a>
-    <a href="termo_responsabilidade.php" class="w3-bar-item w3-button"><b>Termo de Responsabilidade</b></a>
+    <div class="w3-light-grey w3-medium w3-bar-item w3-button" onclick="OpenSubMenu4()">
+        <b>Termo de Responsabilidade</b> <i class="fa fa-caret-down"></i>
+    </div>
+    <div id="sub_menu_4" class="w3-hide w3-white w3-card-4">
+        <a href="termo_responsabilidade.php" class="w3-bar-item w3-button">Gerar termo</a>
+        <a href="termo_upload.php" class="w3-bar-item w3-button">Upload do termo</a>
+    </div>
     <div class="w3-light-grey w3-medium w3-bar-item w3-button" onclick="OpenSubMenu1()">
         <b>Itens</b> <i class="fa fa-caret-down"></i>
     </div>
@@ -70,6 +76,17 @@
 
     function OpenSubMenu3() {
         var x = document.getElementById("sub_menu_3");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+            x.previousElementSibling.className += " w3-gray";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+            x.previousElementSibling.className =
+                    x.previousElementSibling.className.replace(" w3-gray", "");
+        }
+    }
+        function OpenSubMenu4() {
+        var x = document.getElementById("sub_menu_4");
         if (x.className.indexOf("w3-show") == -1) {
             x.className += " w3-show";
             x.previousElementSibling.className += " w3-gray";
