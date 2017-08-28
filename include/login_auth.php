@@ -1,24 +1,26 @@
 <?php
 
 session_start();
-if (empty($_SESSION["id_usuario"]) && empty($_SESSION["senha"])) {
-    $_SESSION["id_usuario"] = $_POST["id"];
+if (empty($_SESSION["login"]) && empty($_SESSION["senha"])) {
+    $_SESSION["login"] = $_POST["login"];
     $_SESSION["senha"] = $_POST["senha"];
 }
 
-$id = $_SESSION["id_usuario"];
+$login = $_SESSION["login"];
 $senha = $_SESSION["senha"];
+
+
 $servername = "localhost";
 $username = "root";
 $password = "lab2208";
 $dbname = "controle_lab_eco_bd";
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT senha FROM usuario WHERE id=$id";
+$sql = "SELECT senha FROM usuario WHERE login='$login'";
 $result = $conn->query($sql);
 $dados_usuario = $result->fetch_assoc();
 

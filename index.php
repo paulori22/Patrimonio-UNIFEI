@@ -8,7 +8,7 @@
 <body>
 <?php 
 session_start();
-$_SESSION["id_usuario"] = NULL;
+$_SESSION["login"] = NULL;
 $_SESSION["senha"] = NULL;
 ?>
 <header class="w3-container w3-indigo">
@@ -17,12 +17,11 @@ $_SESSION["senha"] = NULL;
 
 <div class="w3-container w3-cell-middle" style="width:30%;margin-right:auto;margin-left:auto;">
 
-<form class="w3-container w3-card-4"
-      action="emprestimo.php" method="POST">
+<form class="w3-container w3-card-4" action="emprestimo.php" method="POST">
 
 
 <p>
-<input class="w3-input" type="text" name="id" style="width:90%" required>
+<input class="w3-input" type="text" name="login" style="width:90%" required>
 <label class="w3-label w3-validate" style="color:black">Login</label></p>
 <p>
 <input class="w3-input" type="password" name="senha" style="width:90%" required>
