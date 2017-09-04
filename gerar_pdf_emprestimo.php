@@ -71,9 +71,6 @@ class PDF extends FPDF {
         $this->Ln(8);
 
 
-        //date_default_timezone_set('America/Sao_Paulo');
-        //$data_termo = date('d/m/Y', time());
-
         $this->SetFont('Times', 'B', 12);
         $this->Cell(0, 6, "ASSINATURA DOS RESPONSAVEIS", 1, 0, 'C');
         $this->SetFont('Times', '', 12);
