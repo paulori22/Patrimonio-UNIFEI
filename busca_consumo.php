@@ -5,6 +5,7 @@
     <?php include_once('include/header_tabela.php');?>
     <?php include_once('include/login_auth.php');?>
     <?php require 'include/conexaoBD.php';?>
+    <?php require 'include/controle_de_acesso_standard.php';?>
     
     <!--  Necessario para inciar a api DataTables     -->
     <script>

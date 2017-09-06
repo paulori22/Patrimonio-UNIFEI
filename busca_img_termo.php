@@ -3,6 +3,7 @@
 include_once('include/login_auth.php');
 include_once 'header.php';
 require 'include/conexaoBD.php';
+require 'include/controle_de_acesso_operador.php';
 
 $id_emprestimo = ($_GET['id']);
 

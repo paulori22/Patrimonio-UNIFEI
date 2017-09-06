@@ -6,6 +6,7 @@
     <?php include_once('include/login_auth.php');?>
     <?php require 'include/conexaoBD.php';?>
     <?php require 'gerar_pdf_emprestimo.php';?>
+    <?php require 'include/controle_de_acesso_operador.php';?>
 
     <!--  Necessario para inciar a api DataTables     -->
     <script>

@@ -3,8 +3,9 @@
     <title>Controle de Patrimonio ECO</title>
     
     <?php include_once('include/header_tabela.php');?>
-    <?php include_once('include/login_auth.php');?>
+    <?php require 'include/login_auth.php';?>
     <?php require 'include/conexaoBD.php';?>
+    <?php require 'include/controle_de_acesso_operador.php';?>
     
     <?php $msg_emprestimo = NULL; ?>
 

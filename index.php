@@ -17,7 +17,7 @@ $_SESSION["senha"] = NULL;
 
 <div class="w3-container w3-cell-middle" style="width:30%;margin-right:auto;margin-left:auto;">
 
-<form class="w3-container w3-card-4" action="emprestimo.php" method="POST">
+<form class="w3-container w3-card-4" action="pagina_inicial.php" method="POST">
 
 
 <p>

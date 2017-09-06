@@ -1,6 +1,6 @@
 <?php
 
-include_once('include/login_auth.php');
+require 'include/login_auth.php';
 require 'include/conexaoBD.php';
 
 $id_emprestimo = ($_GET['id']);

@@ -3,41 +3,12 @@
     <title>Controle de Patrimonio ECO</title>
     
     <?php include_once('header.php');?>
+    <?php require 'include/login_auth.php';?>
+    <?php require 'include/conexaoBD.php';?>
+    <?php require 'include/controle_de_acesso_adm.php';?>
     
     <body>
         <?php
-        session_start();
-        if (empty($_SESSION["id_usuario"]) && empty($_SESSION["senha"])) {
-            $_SESSION["id_usuario"] = $_POST["id"];
-            $_SESSION["senha"] = $_POST["senha"];
-        }
-
-        $id = $_SESSION["id_usuario"];
-        $senha = $_SESSION["senha"];
-        $servername = "localhost";
-        $username = "root";
-        $password = "lab2208";
-        $dbname = "controle_lab_eco_bd";
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        $sql = "SELECT senha FROM usuario WHERE id=$id";
-        $result = $conn->query($sql);
-        $dados_usuario = $result->fetch_assoc();
-
-        if (empty($dados_usuario)) {
-            header("Location:index.php");
-        } else {
-            $compara = strcmp($senha, $dados_usuario["senha"]);
-            if ($compara == 0) {
-                
-            } else {
-                header("Location:index.php");
-            }
-        }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //something posted
             
@@ -107,7 +78,6 @@
                             <option value="" disabled selected>Escolha o status do consumo</option>
                             <option value="1">Ativo (em uso)</option>
                             <option value="0">Ocioso</option>
-                            <option value="2">Emprestado</option>
                             <option value="3">Interditado</option>
                         </select>
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Observação" name="observacao" required>

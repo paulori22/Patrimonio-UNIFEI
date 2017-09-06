@@ -1,6 +1,6 @@
 <?php
 
-require('fpdf181/fpdf.php');
+require 'fpdf181/fpdf.php';
 require 'include/conexaoBD.php';
 
 class PDF extends FPDF {
@@ -47,7 +47,7 @@ class PDF extends FPDF {
 
         $texto = utf8_decode('Eu,'
                 . ' '.$nome.','
-                . ' ra/siape nº'
+                . ' siape nº'
                 . ' '.$ra.'.'
                 . ' Declaro ter recebido do Laboratório de'
                 . ' '.$lab
@@ -75,9 +75,11 @@ class PDF extends FPDF {
         $this->Cell(0, 6, "ASSINATURA DOS RESPONSAVEIS", 1, 0, 'C');
         $this->SetFont('Times', '', 12);
         $this->Ln(8);
-        $this->MultiCell(0, 6, utf8_decode("Responsável técnico Laboratório:                                                                                                        " . $data_termo), 1);
-        $this->MultiCell(0, 6, utf8_decode("Professor:                                                                                                                                              " . $data_termo), 1);
+        $this->MultiCell(0, 6, utf8_decode("Coordenador do Laboratório:                                                                                                        " . $data_termo), 1);
+        $this->MultiCell(0, 6, utf8_decode("Técnico Laboratório:                                                                                                                     " . $data_termo), 1);
+        $this->MultiCell(0, 6, utf8_decode("Professor/Tecnico Administrativo:                                                                                               " . $data_termo), 1);
 
+        
         $this->SetFont('Times', 'B', 12);
         $this->Cell(0, 6, utf8_decode("DEVOLUÇÃO DO MATERIAL"), 1, 0, 'C');
         $this->SetFont('Times', '', 12);

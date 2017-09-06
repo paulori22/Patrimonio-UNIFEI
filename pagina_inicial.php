@@ -1,16 +1,19 @@
 <?php
 
-if (!isset($_SESSION)) session_start();
+    require 'include/login_auth.php';
+    require 'include/conexaoBD.php';
+    
+    if (!isset($_SESSION)) session_start();
 
 switch ($_SESSION['tipo']) {
     case 1:
-        include_once 'include/menu_adm.php';
+        header("Location: emprestimo.php");
      break;
     case 2:
-        include_once 'include/menu_operador.php';
+        header("Location: emprestimo.php");
         break;
     case 3:
-        include_once 'include/menu_standard.php';
+        header("Location: busca_permanente.php");
         break;
     default:
       // Destrói a sessão por segurança
@@ -19,3 +22,5 @@ switch ($_SESSION['tipo']) {
       header("Location: index.php"); exit;
         break;
 }
+
+
