@@ -68,7 +68,7 @@
                     <tr>
                         <th>ID</th>
                         <th>NRO</th>
-                        <th>Disciplina</th>
+                        <th>Laboratório</th>
                         <th>Responsavel</th>
                         <th>Operações</th>
                     </tr>
@@ -77,7 +77,7 @@
                     <tr>
                         <th>ID</th>
                         <th>NRO</th>
-                        <th>Disciplina</th>
+                        <th>Laboratório</th>
                         <th>Responsavel</th>
                         <th>Operações</th>
                     </tr>
