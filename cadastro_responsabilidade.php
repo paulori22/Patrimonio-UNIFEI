@@ -20,7 +20,7 @@
             $responsavel = mysqli_real_escape_string($conn, $_REQUEST['responsavel']);
 
             // attempt insert query execution
-            $sql = "INSERT INTO responsabilidade (nro, disciplina, responsavel) VALUES ('$nro', '$disciplina', '$responsavel')";
+            $sql = "INSERT INTO responsabilidade (nro, laboratorio, responsavel) VALUES ('$nro', '$disciplina', '$responsavel')";
 
             if ($conn->query($sql) === TRUE) {
                 $cadastro_sucesso = "Cadastro realizado com sucesso!";
@@ -76,9 +76,9 @@
                 <h2 style="text-align:center">Cadastro Responsabilidade</h2>
                 <form class="w3-container" action="cadastro_responsabilidade.php" method="post">
                     <div class="w3-section">
-                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Laboratório" name="nro" required autofocus>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Laboratório (número)" name="nro" required autofocus>
                         
-                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Disciplina" name="disciplina"  required>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Nome do Laboratório" name="disciplina"  required>
                         
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Responsável" name="responsavel"  required>
                         

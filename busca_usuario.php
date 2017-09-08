@@ -67,6 +67,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Nome</th>
                         <th>Login</th>
                         <th>Senha</th>
                         <th>Tipo</th>
@@ -76,6 +77,7 @@
                 <tfoot>
                     <tr>
                         <th>ID</th>
+                        <th>Nome</th>
                         <th>Login</th>
                         <th>Senha</th>
                         <th>Tipo</th>
@@ -88,12 +90,14 @@
                         // output data of each row
                         while($row = $resultado->fetch_assoc()) {
                             $id = $row['id'];
+                            $nome =$row['nome'];
                             $login = $row['login'];
                             $senha = $row['senha'];
                             $tipo = $row['tipo'];
 
                             echo "<tr>
             <td>$id</td>
+            <td>$nome</td>
             <td>$login</td>
             <td>$senha</td>
             <td>$tipo</td>
@@ -119,6 +123,10 @@
                         <div class="modal-body">
                             <input type="hidden" name="edit_usuario_id" value="<?php echo $id; ?>">
                             <div class="form-group">
+                                <label class="control-label col-sm-2" for="nome">Nome:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $nome; ?>" placeholder="Nome" required autofocus>
+                                </div>
                                 <label class="control-label col-sm-2" for="login">Login:</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" id="login" name="login" value="<?php echo $login; ?>" placeholder="Login" required autofocus>
@@ -177,11 +185,13 @@
                         //Update Items
                         if(isset($_POST['update_usuario'])){
                             $edit_usuario_id = $_POST['edit_usuario_id'];
+                            $nome = $_POST['nome'];
                             $login = $_POST['login'];
                             $senha= $_POST['senha'];
                             $tipo = $_POST['tipo'];
                             
                             $sql = "UPDATE usuario SET 
+                                nome='$nome',
                                 login='$login',
                                 senha='$senha',
                                 tipo='$tipo'

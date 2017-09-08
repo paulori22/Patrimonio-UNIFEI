@@ -12,6 +12,7 @@
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //something posted
+            $nome = mysqli_real_escape_string($conn,$_REQUEST['nome']);
             
             $login = mysqli_real_escape_string($conn,$_REQUEST['login']);
 
@@ -20,7 +21,7 @@
             $senha = mysqli_real_escape_string($conn, $_REQUEST['senha']);
 
             // attempt insert query execution
-            $sql = "INSERT INTO usuario (login, tipo, senha) VALUES ('$login', $tipo, '$senha')";
+            $sql = "INSERT INTO usuario (login, nome, tipo, senha) VALUES ('$login','$nome', $tipo, '$senha')";
 
             if ($conn->query($sql) === TRUE) {
                 $cadastro_sucesso = "Cadastro realizado com sucesso!";
@@ -77,6 +78,7 @@
                 <h2 style="text-align:center">Cadastro Usuário</h2>
                 <form class="w3-container" action="cadastro_usuario.php" method="post">
                     <div class="w3-section">
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Nome" name="nome" required>
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Login" name="login" required>
                         <select class="w3-select w3-border w3-margin-bottom" name="tipo" required>
                             <option value="" disabled selected>Escolha o nivel de acesso</option>

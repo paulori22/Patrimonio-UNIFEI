@@ -122,8 +122,12 @@
                     ?>
                     <td>
                         <div class='btn-group' role='group' aria-label='...'>
+                        <?php if (!isset($_SESSION)) session_start();if($_SESSION["tipo"]==1){?>
+                            
                             <a href="#edit<?php echo $id;?>" data-toggle="modal"><button type='button' class='btn btn-warning btn-sm'><span class='fa fa-pencil-square-o' aria-hidden='true'></span></button></a>
                             <a href="#delete<?php echo $id;?>" data-toggle="modal"><button type='button' class='btn btn-danger btn-sm'><span class='fa fa-trash-o' aria-hidden='true'></span></button></a>
+                        <?php }else{echo "Sem permissão para editar/excluir";} ?>
+          
                         </div>
                     </td>
 

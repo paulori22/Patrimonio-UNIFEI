@@ -32,10 +32,11 @@
     <body>
         <?php
         
-        $sql_inicio =  "SELECT emprestimo.*,GROUP_CONCAT(patrimonio.numero_serie SEPARATOR ', ') as numero_serie "
+        $sql_inicio =  "SELECT emprestimo.*, usuario.nome as nome_usuario,GROUP_CONCAT(patrimonio.numero_serie SEPARATOR ', ') as numero_serie "
     . "FROM `emprestimo` "
     . "	JOIN emprestimo_itens ON emprestimo.id_emprestimo = emprestimo_itens.id_emprestimo "
     . "	JOIN patrimonio ON emprestimo_itens.id_item = patrimonio.id "
+    . "	JOIN usuario ON emprestimo.id_usuario = usuario.id "            
     . "WHERE data_devolucao is NULL "
     . "GROUP BY emprestimo.id_emprestimo;";
         $resultado = $conn->query($sql_inicio);
@@ -79,8 +80,8 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Usuário (ID)</th>
-                        <th>RA/Siape</th>
+                        <th>Usuário</th>
+                        <th>Siape</th>
                         <th>Nome</th>
                         <th>Telefone</th>
                         <th>E-mail</th>
@@ -93,8 +94,8 @@
                 <tfoot>
                     <tr>
                         <th>ID</th>
-                        <th>Usuário (ID)</th>
-                        <th>RA/Siape</th>
+                        <th>Usuário</th>
+                        <th>Siape</th>
                         <th>Nome</th>
                         <th>Telefone</th>
                         <th>E-mail</th>
@@ -110,7 +111,7 @@
                         // output data of each row
                         while($row = $resultado->fetch_assoc()) {
                             $id = $row['id_emprestimo'];
-                            $id_usuario = $row['id_usuario'];
+                            $nome_usuario = $row['nome_usuario'];
                             $ra = $row['ra'];
                             $nome = $row['nome'];
                             $telefone = $row['telefone'];
@@ -123,7 +124,7 @@
 
                             echo "<tr>
             <td>$id</td>
-            <td>$id_usuario</td> 
+            <td>$nome_usuario</td> 
             <td>$ra</td>
             <td>$nome</td>
             <td>$telefone</td>

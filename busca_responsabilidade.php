@@ -183,7 +183,7 @@
                             
                             $sql = "UPDATE responsabilidade SET 
                                 nro='$nro',
-                                disciplina='$disciplina',
+                                laboratorio='$disciplina',
                                 responsavel='$responsavel'
                                 WHERE id=$edit_responsabilidade_id ";
                             if ($conn->query($sql) === TRUE) {

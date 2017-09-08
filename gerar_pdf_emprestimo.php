@@ -43,10 +43,10 @@ class PDF extends FPDF {
         }
     }
 
-    function contrato_emprestimo($nome, $ra, $lab, $itens_patrimonio,$data_termo) {
+    function contrato_emprestimo($nome_requisitante,$nome_usuario, $ra, $lab, $itens_patrimonio,$data_termo) {
 
         $texto = utf8_decode('Eu,'
-                . ' '.$nome.','
+                . ' '.$nome_requisitante.','
                 . ' siape nº'
                 . ' '.$ra.'.'
                 . ' Declaro ter recebido do Laboratório de'
@@ -75,17 +75,37 @@ class PDF extends FPDF {
         $this->Cell(0, 6, "ASSINATURA DOS RESPONSAVEIS", 1, 0, 'C');
         $this->SetFont('Times', '', 12);
         $this->Ln(8);
-        $this->MultiCell(0, 6, utf8_decode("Coordenador do Laboratório:                                                                                                        " . $data_termo), 1);
-        $this->MultiCell(0, 6, utf8_decode("Técnico Laboratório:                                                                                                                     " . $data_termo), 1);
-        $this->MultiCell(0, 6, utf8_decode("Professor/Tecnico Administrativo:                                                                                               " . $data_termo), 1);
-
+        $nome_coordenador = "Nome do Coordenador";
+        $coordenador_lab ="Coordenador do Laboratório:                                                                                                        " . $data_termo."\n"
+                ."                      ___________________________________________________________________\n"
+                ."                                                                      ".$nome_coordenador."                                      ";
         
+        $this->MultiCell(0, 6, utf8_decode($coordenador_lab), 1);
+        
+        $nome_tecnico = $nome_usuario;
+        $tecnico_lab ="Técnico Laboratório:                                                                                                                     " . $data_termo."\n"
+                ."                      ___________________________________________________________________\n"
+                ."                                                                      ".$nome_tecnico."                                      ";
+
+        $this->MultiCell(0, 6, utf8_decode($tecnico_lab), 1);
+        
+        $nome_professor_ta = $nome_requisitante;
+        $professor_ta ="Professor/Tecnico Administrativo:                                                                                               " . $data_termo."\n"
+                ."                      ___________________________________________________________________\n"
+                ."                                                                      ".$nome_professor_ta."                                      ";
+
+       
+        
+        
+        $this->MultiCell(0, 6, utf8_decode($professor_ta), 1);
+
+        $this->Ln(8);
         $this->SetFont('Times', 'B', 12);
         $this->Cell(0, 6, utf8_decode("DEVOLUÇÃO DO MATERIAL"), 1, 0, 'C');
         $this->SetFont('Times', '', 12);
         $this->Ln(8);
         $this->MultiCell(0, 6, utf8_decode("Atesto que o material foi conferido e devolvido dentro do prazo"
-                        . " e nas mesmas condições em que me foram emprestados.\n"
+                        . " e nas mesmas condições em que foram emprestados.\n"
                         . "Assinatura:__________________________________________________________________"), 1);
         $this->Output();
     }
@@ -95,11 +115,15 @@ class PDF extends FPDF {
 if (isset($_GET['id'])) {
     
     $id = $_GET['id'];
+    $nome_usuario = $_GET['nome_usuario'];
     $nome = $_GET['nome'];
     $ra = $_GET['ra'];
     $data_emprestimo = $_GET['data_emprestimo'];
     
-    $sql_consulta = "SELECT emprestimo_itens.id_emprestimo,patrimonio.numero_serie,patrimonio.descricao_fabricante_modelo FROM `emprestimo_itens` JOIN patrimonio ON `id_item`=patrimonio.id WHERE `id_emprestimo` =$id ";
+    $sql_consulta = "SELECT emprestimo_itens.id_emprestimo,patrimonio.numero_serie,patrimonio.descricao_fabricante_modelo "
+            . "FROM `emprestimo_itens` "
+            . "JOIN patrimonio ON `id_item`=patrimonio.id "
+            . "WHERE `id_emprestimo` =$id ";
     $resultado = $conn->query($sql_consulta);
     if ($resultado->num_rows > 0) {
        // output data of each row
@@ -111,7 +135,7 @@ if (isset($_GET['id'])) {
 
        }
        $pdf = new PDF();
-       $pdf->contrato_emprestimo($nome, $ra, "Computação", $dados_itens,$data_emprestimo);
+       $pdf->contrato_emprestimo($nome,$nome_usuario, $ra, "Computação", $dados_itens,$data_emprestimo);
     }
     
 }

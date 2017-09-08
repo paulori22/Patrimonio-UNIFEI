@@ -33,7 +33,10 @@
     <body>
         <?php
         
-        $sql_inicio = "SELECT * FROM `emprestimo` WHERE data_devolucao is NULL;";
+        $sql_inicio = "SELECT emprestimo.*, usuario.nome as nome_usuario "
+                . "FROM `emprestimo` "
+                . "JOIN usuario ON emprestimo.id_usuario = usuario.id "
+                . "WHERE data_devolucao is NULL;";
         $resultado = $conn->query($sql_inicio);
  
         ?>
@@ -75,8 +78,8 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Usuário (ID)</th>
-                        <th>RA/Siape</th>
+                        <th>Usuário</th>
+                        <th>Siape</th>
                         <th>Nome</th>
                         <th>Telefone</th>
                         <th>E-mail</th>
@@ -88,8 +91,8 @@
                 <tfoot>
                     <tr>
                         <th>ID</th>
-                        <th>Usuário (ID)</th>
-                        <th>RA/Siape</th>
+                        <th>Usuário</th>
+                        <th>Siape</th>
                         <th>Nome</th>
                         <th>Telefone</th>
                         <th>E-mail</th>
@@ -104,7 +107,7 @@
                         // output data of each row
                         while($row = $resultado->fetch_assoc()) {
                             $id = $row['id_emprestimo'];
-                            $id_usuario = $row['id_usuario'];
+                            $nome_usuario = $row['nome_usuario'];
                             $ra = $row['ra'];
                             $nome = $row['nome'];
                             $telefone = $row['telefone'];
@@ -114,7 +117,7 @@
 
                             echo "<tr>
             <td>$id</td>
-            <td>$id_usuario</td> 
+            <td>$nome_usuario</td> 
             <td>$ra</td>
             <td>$nome</td>
             <td>$telefone</td>
@@ -126,7 +129,7 @@
                     
                     <td>
                         <div class='btn-group' role='group' aria-label='...'>
-                            <a href="gerar_pdf_emprestimo.php?<?php echo "id=".$id."&nome=".$nome."&ra=".$ra."&data_emprestimo=".date('d/m/Y', strtotime($row['data_emprestimo']));?>" target="_blank"><button type='button' class='w3-button w3-teal'><span class='fa fa-file-pdf-o' aria-hidden='true'></span></button></a>
+                            <a href="gerar_pdf_emprestimo.php?<?php echo "id=".$id."&nome_usuario=".$nome_usuario."&nome=".$nome."&ra=".$ra."&data_emprestimo=".date('d/m/Y', strtotime($row['data_emprestimo']));?>" target="_blank"><button type='button' class='w3-button w3-teal'><span class='fa fa-file-pdf-o' aria-hidden='true'></span></button></a>
                         </div>
                     </td>
         </div>
