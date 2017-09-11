@@ -1,19 +1,8 @@
 <?php
 
-//require 'include/conexaoBD.php';
 include_once('include/login_auth.php');
+require 'include/conexaoBD.php';
 
-$servername = "localhost";
-$username = "root";
-$password = "lab2208";
-$dbname = "controle_lab_eco_bd";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 $ra = $_POST['ra'];
 $id_usuario = $_SESSION["id_usuario"];
@@ -23,8 +12,9 @@ $telefone = $_POST['telefone'];
 $email = $_POST['email'];
 $pre_condicoes = $_POST['pre_condicoes'];
 
+
 if (!($ra)) {
-    print "O campo RA ou Siape deve ser preenchido, por favor verifique este campo";
+    print "O campo Siape deve ser preenchido, por favor verifique este campo";
     exit();
 }
 

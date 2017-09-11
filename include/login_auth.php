@@ -20,7 +20,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT senha,tipo FROM usuario WHERE login='$login'";
+$sql = "SELECT senha, tipo, id FROM usuario WHERE login='$login'";
 $result = $conn->query($sql);
 $dados_usuario = $result->fetch_assoc();
 
@@ -31,6 +31,7 @@ if (empty($dados_usuario)) {
     if ($compara == 0) {
         
         $_SESSION["tipo"] = $dados_usuario["tipo"];
+        $_SESSION["id_usuario"] = $dados_usuario["id"];
         
     } else {
         header("Location:index.php");

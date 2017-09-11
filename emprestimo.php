@@ -70,7 +70,10 @@
     <body>
         <?php
         
-        $sql_inicio = "SELECT * FROM `patrimonio` WHERE status!=2";
+            $sql_inicio = "SELECT patrimonio.*, responsabilidade.responsavel\n"
+        . "FROM `patrimonio`\n"
+        . "JOIN responsabilidade ON patrimonio.responsabilidade = responsabilidade.id\n"
+        . "WHERE status != 2";
         $resultado = $conn->query($sql_inicio);
  
         ?>
@@ -106,7 +109,7 @@
                 <h2 style="text-align:center">Empréstimo</h2>
                 <form id="cadastrar_emprestimo" class="w3-container" action="emprestimo.php">
                     <div class="w3-section">
-                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="RA ou Siape" name="ra" required>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Siape" name="ra" required>
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Nome" name="nome" required>         
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Telefone" name="telefone">
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Email" name="email">
@@ -125,6 +128,7 @@
                         <th>Locação</th>
                         <th>Status</th>
                         <th>Observação</th>
+                        <th>Responsável</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -136,6 +140,7 @@
                         <th>Locação</th>
                         <th>Status</th>
                         <th>Observação</th>
+                        <th>Responsável</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -150,6 +155,7 @@
                             $locacao = $row['locacao'];
                             $status = $row['status'];
                             $observacao = $row['observacao'];
+                            $responsavel = $row['responsavel'];
                             
                             switch ($status) {
                             case 0:
@@ -177,6 +183,7 @@
             <td>$locacao</td>
             <td>$status_string</td>
             <td>$observacao</td>
+            <td>$responsavel</td>
             ";
                     ?>
                     

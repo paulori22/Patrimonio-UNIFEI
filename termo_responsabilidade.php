@@ -33,10 +33,15 @@
     <body>
         <?php
         
-        $sql_inicio = "SELECT emprestimo.*, usuario.nome as nome_usuario "
-                . "FROM `emprestimo` "
-                . "JOIN usuario ON emprestimo.id_usuario = usuario.id "
-                . "WHERE data_devolucao is NULL;";
+        $sql_inicio = "SELECT emprestimo.*, usuario.nome as nome_usuario, responsabilidade.responsavel, responsabilidade.laboratorio\n"
+            . "FROM `emprestimo`\n"
+            . "JOIN usuario ON emprestimo.id_usuario = usuario.id\n"
+            . "JOIN emprestimo_itens ON emprestimo.id_emprestimo=emprestimo_itens.id_emprestimo\n"
+            . "JOIN patrimonio ON patrimonio.id = emprestimo_itens.id_item\n"
+            . "JOIN responsabilidade ON responsabilidade.id = patrimonio.responsabilidade\n"
+            . "WHERE data_devolucao is NULL\n"
+            . "GROUP BY emprestimo.id_emprestimo, responsabilidade.id";
+
         $resultado = $conn->query($sql_inicio);
  
         ?>
@@ -57,16 +62,6 @@
             </header>
 
             <div class="w3-container w3-padding-32" style="padding-left:32px">
-
-                <br>
-                <?php
-                if (@$_SESSION["cadastrado"] == 1) {
-                    $_SESSION["cadastrado"] = 0;
-                    ?>
-                <?php }
-                ?>
-                
-                <div id="resposta" class='w3-container w3-center w3-red'></div>
    
             
                 <h2 style="text-align:center">Termo de Responsabilidade</h2>
@@ -113,7 +108,9 @@
                             $telefone = $row['telefone'];
                             $email = $row['email'];
                             $data_emprestimo = date('d/m/Y h:m:s', strtotime($row['data_emprestimo']));
-                            $pre_condicoes= $row['pre_condicoes'];             
+                            $pre_condicoes= $row['pre_condicoes'];
+                            $responsavel = $row['responsavel'];
+                            $laboratorio = $row['laboratorio'];
 
                             echo "<tr>
             <td>$id</td>
@@ -129,7 +126,7 @@
                     
                     <td>
                         <div class='btn-group' role='group' aria-label='...'>
-                            <a href="gerar_pdf_emprestimo.php?<?php echo "id=".$id."&nome_usuario=".$nome_usuario."&nome=".$nome."&ra=".$ra."&data_emprestimo=".date('d/m/Y', strtotime($row['data_emprestimo']));?>" target="_blank"><button type='button' class='w3-button w3-teal'><span class='fa fa-file-pdf-o' aria-hidden='true'></span></button></a>
+                            <a href="gerar_pdf_emprestimo.php?<?php echo "id=".$id."&nome_usuario=".$nome_usuario."&nome=".$nome."&ra=".$ra."&data_emprestimo=".date('d/m/Y', strtotime($row['data_emprestimo']))."&responsavel=".$responsavel."&laboratorio=".$laboratorio;?>" target="_blank"><button type='button' class='w3-button w3-teal'><span class='fa fa-file-pdf-o' aria-hidden='true'></span></button></a>
                         </div>
                     </td>
         </div>

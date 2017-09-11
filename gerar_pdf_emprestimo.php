@@ -43,7 +43,7 @@ class PDF extends FPDF {
         }
     }
 
-    function contrato_emprestimo($nome_requisitante,$nome_usuario, $ra, $lab, $itens_patrimonio,$data_termo) {
+    function contrato_emprestimo($nome_requisitante,$nome_usuario, $ra, $lab, $nome_coordenador_lab, $itens_patrimonio,$data_termo) {
 
         $texto = utf8_decode('Eu,'
                 . ' '.$nome_requisitante.','
@@ -78,7 +78,7 @@ class PDF extends FPDF {
         $nome_coordenador = "Nome do Coordenador";
         $coordenador_lab ="Coordenador do Laboratório:                                                                                                        " . $data_termo."\n"
                 ."                      ___________________________________________________________________\n"
-                ."                                                                      ".$nome_coordenador."                                      ";
+                ."                                                                      ".$nome_coordenador_lab."                                      ";
         
         $this->MultiCell(0, 6, utf8_decode($coordenador_lab), 1);
         
@@ -119,6 +119,8 @@ if (isset($_GET['id'])) {
     $nome = $_GET['nome'];
     $ra = $_GET['ra'];
     $data_emprestimo = $_GET['data_emprestimo'];
+    $responsavel = $_GET['responsavel'];
+    $laboratorio = $_GET['laboratorio'];
     
     $sql_consulta = "SELECT emprestimo_itens.id_emprestimo,patrimonio.numero_serie,patrimonio.descricao_fabricante_modelo "
             . "FROM `emprestimo_itens` "
@@ -135,7 +137,7 @@ if (isset($_GET['id'])) {
 
        }
        $pdf = new PDF();
-       $pdf->contrato_emprestimo($nome,$nome_usuario, $ra, "Computação", $dados_itens,$data_emprestimo);
+       $pdf->contrato_emprestimo($nome, $nome_usuario, $ra, $laboratorio, $responsavel, $dados_itens, $data_emprestimo);
     }
     
 }
