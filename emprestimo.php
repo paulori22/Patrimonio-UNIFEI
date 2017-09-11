@@ -51,10 +51,10 @@
             data: data_array,
             success: function(data) {
                 
-                 confirm(data);
+                 //confirm(data);
                  $("#resposta").html(data);
-                 if(data=="Emprestimo inserido com sucesso!"){
-                 window.location.reload();}
+                 if(alert(data)){}
+                 else    window.location.reload();         
             }
         });
     });
