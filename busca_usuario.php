@@ -133,11 +133,16 @@
                                 </div>
                                 <label class="control-label col-sm-2" for="senha">Senha:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="senha" name="senha" value="<?php echo $senha; ?>" placeholder="Senha" required>
+                                    <input type="password" class="form-control" id="senha" name="senha" value="" placeholder="Senha" required>
                                 </div>
                                 <label class="control-label col-sm-2" for="tipo">Tipo:</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="tipo" name="tipo" value="<?php echo $tipo; ?>" placeholder="Tipo" required>
+                                    <select class="w3-select w3-border w3-margin-bottom" name="tipo" required>
+                                        <option value="" disabled selected>Escolha o nivel de acesso</option>
+                                        <option value="1" <?php if($tipo==1) echo 'selected';?> >Administrador</option>
+                                        <option value="2" <?php if($tipo==2) echo 'selected';?> >Operador (consultas e empréstimo)</option>
+                                        <option value="3" <?php if($tipo==3) echo 'selected';?> >Standard (consultas)</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

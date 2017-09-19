@@ -5,7 +5,7 @@
     <?php include_once('include/header_tabela.php'); ?>
     <?php include_once('include/login_auth.php'); ?>
     <?php require 'include/conexaoBD.php'; ?>
-    <?php require 'include/controle_de_acesso_operador.php';?>
+    <?php require 'include/controle_de_acesso_operador.php'; ?>
 
     <!--  Necessario para inciar a api DataTables     -->
     <script>
@@ -27,12 +27,12 @@
 
     <body>
         <?php
-        $sql_inicio =  "SELECT emprestimo.*, usuario.nome as nome_usuario,GROUP_CONCAT(patrimonio.numero_serie SEPARATOR ', ') as numero_serie "
-    . "FROM `emprestimo` "
-    . "	JOIN emprestimo_itens ON emprestimo.id_emprestimo = emprestimo_itens.id_emprestimo "
-    . "	JOIN patrimonio ON emprestimo_itens.id_item = patrimonio.id "
-    . "	JOIN usuario ON emprestimo.id_usuario = usuario.id "            
-    . "GROUP BY emprestimo.id_emprestimo;";
+        $sql_inicio = "SELECT emprestimo.*, usuario.nome as nome_usuario,GROUP_CONCAT(patrimonio.numero_serie SEPARATOR ', ') as numero_serie "
+                . "FROM `emprestimo` "
+                . "	JOIN emprestimo_itens ON emprestimo.id_emprestimo = emprestimo_itens.id_emprestimo "
+                . "	JOIN patrimonio ON emprestimo_itens.id_item = patrimonio.id "
+                . "	JOIN usuario ON emprestimo.id_usuario = usuario.id "
+                . "GROUP BY emprestimo.id_emprestimo;";
         $resultado = $conn->query($sql_inicio);
         ?>
 
@@ -54,10 +54,10 @@
             <div class="w3-container w3-padding-32" style="padding-left:32px">
 
                 <br>
-<?php
-if (@$_SESSION["cadastrado"] == 1) {
-    $_SESSION["cadastrado"] = 0;
-    ?>
+                <?php
+                if (@$_SESSION["cadastrado"] == 1) {
+                    $_SESSION["cadastrado"] = 0;
+                    ?>
                 <?php }
                 ?>
                 <br>
@@ -95,21 +95,21 @@ if (@$_SESSION["cadastrado"] == 1) {
                             </tr>
                         </tfoot>
                         <tbody>
-<?php
-if ($resultado->num_rows > 0) {
-    // output data of each row
-    while ($row = $resultado->fetch_assoc()) {
-        $id = $row['id_emprestimo'];
-        $nome_usuario = $row['nome_usuario'];
-        $ra = $row['ra'];
-        $nome = $row['nome'];
-        $telefone = $row['telefone'];
-        $email = $row['email'];
-        $data_emprestimo = date('d/m/Y h:m:s', strtotime($row['data_emprestimo']));
-        $pre_condicoes = $row['pre_condicoes'];
-        $itens = $row['numero_serie'];
+                            <?php
+                            if ($resultado->num_rows > 0) {
+                                // output data of each row
+                                while ($row = $resultado->fetch_assoc()) {
+                                    $id = $row['id_emprestimo'];
+                                    $nome_usuario = $row['nome_usuario'];
+                                    $ra = $row['ra'];
+                                    $nome = $row['nome'];
+                                    $telefone = $row['telefone'];
+                                    $email = $row['email'];
+                                    $data_emprestimo = date('d/m/Y h:m:s', strtotime($row['data_emprestimo']));
+                                    $pre_condicoes = $row['pre_condicoes'];
+                                    $itens = $row['numero_serie'];
 
-        echo "<tr>
+                                    echo "<tr>
             <td>$id</td>
             <td>$nome_usuario</td> 
             <td>$ra</td>
@@ -120,7 +120,7 @@ if ($resultado->num_rows > 0) {
             <td>$pre_condicoes</td>
             <td>$itens</td>
             ";
-        ?>
+                                    ?>
                                 <td>
                                     <div class='btn-group' role='group' aria-label='...'>
                                         <a href="#edit<?php echo $id; ?>" data-toggle="modal"><button type='button' class='btn btn-success btn-sm'><span class='fa fa-upload' aria-hidden='true'></span></button></a>
@@ -141,7 +141,7 @@ if ($resultado->num_rows > 0) {
                                                 <div class="modal-body">
                                                     <input type="hidden" name="id_emprestimo" value="<?php echo $id; ?>">
                                                     <div class="form-group">
-                                                        <label class="control-label">Escolha o arquivo</label>
+                                                        <label class="control-label">Escolha o arquivo (deve ser do tipo .jpg)</label>
                                                         <div class="w3-container">
                                                             <input id ="img_emprestimo" name="img_emprestimo" type="file" accept=".jpg" required>
                                                         </div>    
@@ -160,62 +160,62 @@ if ($resultado->num_rows > 0) {
 
                                 </tr>
 
-        <?php
-    }
+                                <?php
+                            }
 
 
 
-    //Enviar imagens
-    if (isset($_POST['upload_termo'])) {
-        $id_emprestimo = $_POST['id_emprestimo'];
+                            //Enviar imagens
+                            if (isset($_POST['upload_termo'])) {
+                                $id_emprestimo = $_POST['id_emprestimo'];
 
-        // Make sure the user actually
-        // selected and uploaded a file
+                                // Make sure the user actually
+                                // selected and uploaded a file
 
-        if (isset($_FILES['img_emprestimo']) && $_FILES['img_emprestimo']['size'] > 0) {
-
-
-            // Temporary file name stored on the server
-
-            $tmpName = $_FILES['img_emprestimo']['tmp_name'];
+                                if (isset($_FILES['img_emprestimo']) && $_FILES['img_emprestimo']['size'] > 0) {
 
 
-            // Read the file
+                                    // Temporary file name stored on the server
 
-            $fp = fopen($tmpName, 'r');
-
-            $data_img = fread($fp, filesize($tmpName));
-
-            $data_img = addslashes($data_img);
-
-            fclose($fp);
+                                    $tmpName = $_FILES['img_emprestimo']['tmp_name'];
 
 
+                                    // Read the file
 
-            $sql_busca = "SELECT * FROM termo_responsabilidade WHERE id_emprestimo=$id_emprestimo";
-            $res = $conn->query($sql_busca);
+                                    $fp = fopen($tmpName, 'r');
 
-            if ($res->num_rows > 0) {
-                $sql = "UPDATE termo_responsabilidade SET img_emprestimo='$data_img' ";
+                                    $data_img = fread($fp, filesize($tmpName));
 
-                if ($conn->query($sql) === TRUE) {
-                    echo "<script>alert('Termo sobreescrito. Upload efetuado com sucesso!');</script>";
-                } else {
-                    echo "Erro ao realizar o upload do arquivo: " . $conn->error;
-                }
-            } else {
-                $sql = "INSERT INTO termo_responsabilidade (id_emprestimo, img_emprestimo) VALUES ($id_emprestimo,'$data_img') ";
+                                    $data_img = addslashes($data_img);
 
-                if ($conn->query($sql) === TRUE) {
-                    echo "<script>alert('Upload efetuado com sucesso!');</script>";
-                } else {
-                    echo "Erro ao realizar o upload do arquivo: " . $conn->error;
-                }
-            }
-        }
-    }
-}
-?>
+                                    fclose($fp);
+
+
+
+                                    $sql_busca = "SELECT * FROM termo_responsabilidade WHERE id_emprestimo=$id_emprestimo";
+                                    $res = $conn->query($sql_busca);
+
+                                    if ($res->num_rows > 0) {
+                                        $sql = "UPDATE termo_responsabilidade SET img_emprestimo='$data_img' ";
+
+                                        if ($conn->query($sql) === TRUE) {
+                                            echo "<script>alert('Termo sobreescrito. Upload efetuado com sucesso!');</script>";
+                                        } else {
+                                            echo "Erro ao realizar o upload do arquivo: " . $conn->error;
+                                        }
+                                    } else {
+                                        $sql = "INSERT INTO termo_responsabilidade (id_emprestimo, img_emprestimo) VALUES ($id_emprestimo,'$data_img') ";
+
+                                        if ($conn->query($sql) === TRUE) {
+                                            echo "<script>alert('Upload efetuado com sucesso!');</script>";
+                                        } else {
+                                            echo "Erro ao realizar o upload do arquivo: " . $conn->error;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>       

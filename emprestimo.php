@@ -107,10 +107,11 @@
    
             
                 <h2 style="text-align:center">Empréstimo</h2>
+                <h4>Dados da pessoa que irá assumir o empréstimo:</h4>
                 <form id="cadastrar_emprestimo" class="w3-container" action="emprestimo.php">
                     <div class="w3-section">
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Siape" name="ra" required>
-                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Nome" name="nome" required>         
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Nome Completo" name="nome" required>         
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Telefone" name="telefone">
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Email" name="email">
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Pré Condições" name="pre_condicoes" required>

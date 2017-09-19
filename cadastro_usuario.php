@@ -78,11 +78,11 @@
                 <h2 style="text-align:center">Cadastro Usuário</h2>
                 <form class="w3-container" action="cadastro_usuario.php" method="post">
                     <div class="w3-section">
-                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Nome" name="nome" required>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Nome Completo" name="nome" required>
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Login" name="login" required>
                         <select class="w3-select w3-border w3-margin-bottom" name="tipo" required>
                             <option value="" disabled selected>Escolha o nivel de acesso</option>
-                            <option value="1">Adminnistrador</option>
+                            <option value="1">Administrador</option>
                             <option value="2">Operador (consultas e empréstimo)</option>
                             <option value="3">Standard (consultas)</option>
                         </select>

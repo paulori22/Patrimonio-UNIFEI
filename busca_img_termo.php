@@ -26,7 +26,10 @@ if($img_emprestimo == NULL)
     
 }
 else{
+    
     echo '<div class="w3-container w3-center">';
     echo '<img src="mostra_img_termo.php?id='.$id_emprestimo.'" class="w3-image" style="width:100%;max-width:1000px" />';
     echo '</div>';
+    
+
 }

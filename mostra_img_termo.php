@@ -18,5 +18,9 @@ if ($res->num_rows > 0) {
     $img_emprestimo = $row['img_emprestimo'];
 }
 
-    header('Content-type: image/jpg');
-     echo $img_emprestimo;
+ //   header('Content-type: image/jpg');
+ //    echo $img_emprestimo;
+header("Content-Type: application/pdf");
+header("Content-Length: ". strlen($img_emprestimo)); 
+header('Content-Disposition: attachment; filename='."teste.pdf");
+echo $img_emprestimo;
