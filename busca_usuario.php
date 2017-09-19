@@ -69,7 +69,7 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Login</th>
-                        <th>Senha</th>
+
                         <th>Tipo</th>
                         <th>Operações</th>
                     </tr>
@@ -79,7 +79,7 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Login</th>
-                        <th>Senha</th>
+
                         <th>Tipo</th>
                         <th>Operações</th>
                     </tr>
@@ -92,15 +92,31 @@
                             $id = $row['id'];
                             $nome =$row['nome'];
                             $login = $row['login'];
-                            $senha = $row['senha'];
+                            //$senha = $row['senha'];
                             $tipo = $row['tipo'];
+                            
+                            switch ($tipo) {
+                                
+                            case 1:
+                                $tipo_string =  "Administrador";
+                                break;
+                            case 2:
+                                $tipo_string =  "Operador (consultas e empréstimo)";
+                                break;
+                            case 3:
+                                $tipo_string = "Standard (consultas)";
+                                break;
+                            default :
+                                $tipo_string = "Sem permissão correta";
+                                break;
+                            }
 
                             echo "<tr>
             <td>$id</td>
             <td>$nome</td>
             <td>$login</td>
-            <td>$senha</td>
-            <td>$tipo</td>
+            
+            <td>$tipo_string</td>
             ";
                     ?>
                     <td>
@@ -192,13 +208,13 @@
                             $edit_usuario_id = $_POST['edit_usuario_id'];
                             $nome = $_POST['nome'];
                             $login = $_POST['login'];
-                            $senha= $_POST['senha'];
+                            $senha_hash = password_hash($_POST['senha'], PASSWORD_DEFAULT);
                             $tipo = $_POST['tipo'];
                             
                             $sql = "UPDATE usuario SET 
                                 nome='$nome',
                                 login='$login',
-                                senha='$senha',
+                                senha='$senha_hash',
                                 tipo='$tipo'
                                 WHERE id=$edit_usuario_id ";
                             if ($conn->query($sql) === TRUE) {

@@ -28,15 +28,15 @@ if (empty($dados_usuario)) {
     $erro_login = "Usuário e/ou senha incorreto!";
     header("Location:index.php?erro_login=$erro_login");
 } else {
-    $compara = strcmp($senha, $dados_usuario["senha"]);
-    if ($compara == 0) {
+    
+    if (password_verify($senha, $dados_usuario["senha"])) {
         
         $_SESSION["tipo"] = $dados_usuario["tipo"];
         $_SESSION["id_usuario"] = $dados_usuario["id"];
         
     } else {
         $erro_login = "Usuário e/ou senha incorreto!";
-        header("Location:index.php?erro=$erro_login");
+        header("Location:index.php?erro_login=$erro_login");
     }
 }
 

@@ -19,9 +19,11 @@
             $tipo = $_REQUEST['tipo'];
 
             $senha = mysqli_real_escape_string($conn, $_REQUEST['senha']);
+            
+            $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
 
             // attempt insert query execution
-            $sql = "INSERT INTO usuario (login, nome, tipo, senha) VALUES ('$login','$nome', $tipo, '$senha')";
+            $sql = "INSERT INTO usuario (login, nome, tipo, senha) VALUES ('$login','$nome', $tipo, '$senha_hash')";
 
             if ($conn->query($sql) === TRUE) {
                 $cadastro_sucesso = "Cadastro realizado com sucesso!";
