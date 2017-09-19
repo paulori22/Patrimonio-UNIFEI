@@ -25,7 +25,8 @@ $result = $conn->query($sql);
 $dados_usuario = $result->fetch_assoc();
 
 if (empty($dados_usuario)) {
-    header("Location:index.php");
+    $erro_login = "Usuário e/ou senha incorreto!";
+    header("Location:index.php?erro_login=$erro_login");
 } else {
     $compara = strcmp($senha, $dados_usuario["senha"]);
     if ($compara == 0) {
@@ -34,7 +35,8 @@ if (empty($dados_usuario)) {
         $_SESSION["id_usuario"] = $dados_usuario["id"];
         
     } else {
-        header("Location:index.php");
+        $erro_login = "Usuário e/ou senha incorreto!";
+        header("Location:index.php?erro=$erro_login");
     }
 }
 
