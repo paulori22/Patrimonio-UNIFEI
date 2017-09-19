@@ -19,7 +19,9 @@ switch ($_SESSION['tipo']) {
       // Destrói a sessão por segurança
       session_destroy();
       // Redireciona o visitante de volta pro login
-      header("Location: index.php"); exit;
+        $erro_login = "Usuário ou senha incorretos!";
+        header("Location:index.php?erro_login={$erro_login}");
+        exit;
         break;
 }
 
