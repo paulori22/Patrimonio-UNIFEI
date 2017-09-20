@@ -69,29 +69,29 @@
                         <thead>
                             <tr>
                                 <th>Data do Empréstimo</th>
-                                <th>Operador do sistema</th>
+                                <th>Data da Devolução</th>
                                 <th>Emprestado para</th>
+                                <th>Itens</th>
+                                <th>Pré Condições</th>
+                                <th>Pós Condições</th>
                                 <th>Siape</th>
                                 <th>Telefone</th>
                                 <th>E-mail</th>   
-                                <th>Pré Condições</th>
-                                <th>Pos Condições</th>
-                                <th>Itens emprestados</th>
-                                <th>Data da Devolução</th>
+                                <th>Operador do sistema</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Data do Empréstimo</th>
-                                <th>Operador do sistema</th>
+                                <th>Data da Devolução</th>
                                 <th>Emprestado para</th>
+                                <th>Itens</th>
+                                <th>Pré Condições</th>
+                                <th>Pós Condições</th>
                                 <th>Siape</th>
                                 <th>Telefone</th>
                                 <th>E-mail</th>   
-                                <th>Pré Condições</th>
-                                <th>Pos Condições</th>
-                                <th>Itens emprestados</th>
-                                <th>Data da Devolução</th>
+                                <th>Operador do sistema</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -104,24 +104,28 @@
                                     $nome = $row['nome'];
                                     $telefone = $row['telefone'];
                                     $email = $row['email'];
-                                    $data_emprestimo = DateTime::createFromFormat ( "Y-m-d H:i:s", $row["data_emprestimo"] )->format('d/m/Y H:i:s');
-                                    //date('d/m/Y h:m:s', strtotime($row['data_emprestimo']));
-                                    $data_devolucao = DateTime::createFromFormat ( "Y-m-d H:i:s", $row["data_devolucao"] )->format('d/m/Y H:i:s');
+                                    $data_emprestimo = DateTime::createFromFormat ( "Y-m-d H:i:s", $row["data_emprestimo"] )->format('d/m/Y H:i:s');                              
+                                    
+                                    if(is_null($row["data_devolucao"])){
+                                        $data_devolucao = "Não Devolvido";
+                                    }else{
+                                        $data_devolucao = DateTime::createFromFormat ( "Y-m-d H:i:s", $row["data_devolucao"] )->format('d/m/Y H:i:s');
+                                    }     
                                     $pre_condicoes = $row['pre_condicoes'];
                                     $pos_condicoes = $row['pos_condicoes'];
                                     $itens = $row['numero_serie'];
 
                                     echo "<tr>
             <td>$data_emprestimo</td>
-            <td>$nome_usuario</td>
+            <td>$data_devolucao</td> 
             <td>$nome</td>
+            <td>$itens</td>
+            <td>$pre_condicoes</td>
+            <td>$pos_condicoes</td>
             <td>$ra</td>
             <td>$telefone</td>
             <td>$email</td>
-            <td>$pre_condicoes</td>
-            <td>$pos_condicoes</td>
-            <td>$itens</td>
-            <td>$data_devolucao</td>
+            <td>$nome_usuario</td>                
             ";
                                     ?>
 
