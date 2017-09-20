@@ -115,7 +115,8 @@
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Telefone" name="telefone">
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Email" name="email">
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Pré Condições" name="pre_condicoes" required>
-                        </div>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Observações / Itens de consumo / Informações adicionais (não obrigatório)" name="observacao"
+                    </div>
             <!-- Dados -->
             <div class="w3-container">
 

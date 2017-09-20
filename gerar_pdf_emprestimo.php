@@ -187,7 +187,7 @@ class PDF extends FPDF {
         }
     }
 
-    function contrato_emprestimo($nome_requisitante, $nome_usuario, $ra, $lab, $nome_coordenador_lab, $resultado, $data_termo) {
+    function contrato_emprestimo($nome_requisitante, $nome_usuario, $ra, $lab, $nome_coordenador_lab, $resultado, $data_termo, $observacao) {
 
         $texto = utf8_decode('Eu,'
                 . ' ' . $nome_requisitante . ','
@@ -235,6 +235,9 @@ class PDF extends FPDF {
         }
 
         $this->WriteTable($dados_tabela);
+        if(!empty($observacao)){
+            $this->MultiCell(0, 6, $observacao, 1);
+        }
         $this->Ln(8);
 
 
@@ -288,6 +291,7 @@ if (isset($_GET['id'])) {
     $data_emprestimo = $_GET['data_emprestimo'];
     $responsavel = $_GET['responsavel'];
     $laboratorio = $_GET['laboratorio'];
+    $observacao = $_GET['obs'];
 
     $sql_consulta = "SELECT emprestimo_itens.id_emprestimo,patrimonio.numero_serie,patrimonio.descricao_fabricante_modelo "
             . "FROM `emprestimo_itens` "
@@ -296,23 +300,9 @@ if (isset($_GET['id'])) {
 
     $resultado = $conn->query($sql_consulta);
     if ($resultado->num_rows > 0) {
-        // output data of each row
 
-        /*
-          $dados_itens = null;
-          while($row = $resultado->fetch_assoc()) {
-          $dados_itens[] = array('text' => $row['numero_serie'], 'width' => $autowidthtable, 'height' => '5', 'align' => 'C', 'font_name' => 'Times', 'font_size' => '12', 'font_style' => 'B', 'fillcolor' => '255,255,255', 'textcolor' => '0,0,0', 'drawcolor' => '0,0,0', 'linewidth' => '0.4', 'linearea' => 'LTBR');
-          $dados_itens[] = array('text' => $row['descricao_fabricante_modelo'], 'width' => $autowidthtable, 'height' => '5', 'align' => 'C', 'font_name' => 'Times', 'font_size' => '12', 'font_style' => 'B', 'fillcolor' => '255,255,255', 'textcolor' => '0,0,0', 'drawcolor' => '0,0,0', 'linewidth' => '0.4', 'linearea' => 'LTBR');
-          $dados_itens[] = array('text' => 1, 'width' => $autowidthtable, 'height' => '5', 'align' => 'C', 'font_name' => 'Times', 'font_size' => '12', 'font_style' => 'B', 'fillcolor' => '255,255,255', 'textcolor' => '0,0,0', 'drawcolor' => '0,0,0', 'linewidth' => '0.4', 'linearea' => 'LTBR');
-
-          //$dados_itens[] = array($row['numero_serie'], $row['descricao_fabricante_modelo'], 1);
-
-
-          }
-
-         */
         $pdf = new PDF();
-        $pdf->contrato_emprestimo($nome, $nome_usuario, $ra, $laboratorio, $responsavel, $resultado, $data_emprestimo);
+        $pdf->contrato_emprestimo($nome, $nome_usuario, $ra, $laboratorio, $responsavel, $resultado, $data_emprestimo,$observacao);
     }
 }
 ?>

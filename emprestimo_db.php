@@ -11,6 +11,7 @@ $nome = $_POST['nome'];
 $telefone = $_POST['telefone'];
 $email = $_POST['email'];
 $pre_condicoes = $_POST['pre_condicoes'];
+$observacao = $_POST['observacao'];
 
 
 if (!($ra)) {
@@ -35,10 +36,13 @@ if (!($id_itens)) {
 date_default_timezone_set('America/Sao_Paulo');
 $data_emprestimo = date('Y/m/d H:i:s', time());
 
-
+if(empty($observacao)){
 $sql_insert = "INSERT INTO emprestimo (id_usuario, ra, nome, telefone, email, data_emprestimo, pre_condicoes)"
         . " VALUES ($id_usuario,'$ra', '$nome','$telefone','$email','$data_emprestimo','$pre_condicoes'); ";
-
+}else{
+    $sql_insert = "INSERT INTO emprestimo (id_usuario, ra, nome, telefone, email, data_emprestimo, pre_condicoes, observacao)"
+        . " VALUES ($id_usuario,'$ra', '$nome','$telefone','$email','$data_emprestimo','$pre_condicoes','$observacao'); ";
+}
 if ($conn->query($sql_insert) === TRUE) {
 
     $id_emprestimo = $conn->insert_id;

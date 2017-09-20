@@ -111,6 +111,7 @@
                             $pre_condicoes= $row['pre_condicoes'];
                             $responsavel = $row['responsavel'];
                             $laboratorio = $row['laboratorio'];
+                            $observacao = $row['observacao'];
 
                             echo "<tr>
             <td>$id</td>
@@ -126,7 +127,7 @@
                     
                     <td>
                         <div class='btn-group' role='group' aria-label='...'>
-                            <a href="gerar_pdf_emprestimo.php?<?php echo "id=".$id."&nome_usuario=".$nome_usuario."&nome=".$nome."&ra=".$ra."&data_emprestimo=".date('d/m/Y', strtotime($row['data_emprestimo']))."&responsavel=".$responsavel."&laboratorio=".$laboratorio;?>" target="_blank"><button type='button' class='w3-button w3-teal'><span class='fa fa-file-pdf-o' aria-hidden='true'></span></button></a>
+                            <a href="gerar_pdf_emprestimo.php?<?php echo "id=".$id."&nome_usuario=".$nome_usuario."&nome=".$nome."&ra=".$ra."&data_emprestimo=".DateTime::createFromFormat ( "Y-m-d H:i:s", $row["data_emprestimo"] )->format('d/m/Y')."&responsavel=".$responsavel."&laboratorio=".$laboratorio."&obs=".$observacao;?>" target="_blank"><button type='button' class='w3-button w3-teal'><span class='fa fa-file-pdf-o' aria-hidden='true'></span></button></a>
                         </div>
                     </td>
         </div>
