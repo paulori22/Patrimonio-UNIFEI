@@ -116,7 +116,7 @@
                             $nome = $row['nome'];
                             $telefone = $row['telefone'];
                             $email = $row['email'];
-                            $data_emprestimo = date('d/m/Y h:m:s', strtotime($row['data_emprestimo']));
+                            $data_emprestimo = DateTime::createFromFormat ( "Y-m-d H:i:s", $row["data_emprestimo"] )->format('d/m/Y H:i:s');
                             $pre_condicoes= $row['pre_condicoes'];
                             $itens = $row['numero_serie'];
                             

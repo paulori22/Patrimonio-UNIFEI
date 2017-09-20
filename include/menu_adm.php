@@ -4,6 +4,7 @@
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-indigo w3-hide-large w3-closenav w3-large">Fechar <i class="fa fa-remove"></i></a>
     <a href="emprestimo.php" class="w3-bar-item w3-button"><b>Emprestimo</b></a>
     <a href="devolucao.php" class="w3-bar-item w3-button"><b>Devolução</b></a>
+    <a href="historico_emprestimo.php" class="w3-bar-item w3-button"><b>Histórico dos Empréstimos</b></a>
     <div class="w3-light-grey w3-medium w3-bar-item w3-button" onclick="OpenSubMenu4()">
         <b>Termo de Responsabilidade</b> <i class="fa fa-caret-down"></i>
     </div>
