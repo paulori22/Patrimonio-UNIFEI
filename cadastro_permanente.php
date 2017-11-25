@@ -22,18 +22,18 @@
             
             $status = $_REQUEST['status'];
             
-            $tag_patrimonio = mysqli_real_escape_string($conn, $_REQUEST['tag_patrimonio']);
+            //$tag_patrimonio = mysqli_real_escape_string($conn, $_REQUEST['tag_patrimonio']);
 
             $observacao = mysqli_real_escape_string($conn, $_REQUEST['observacao']);
 
 
             // attempt insert query execution
-            $sql = "INSERT INTO patrimonio (numero_serie, descricao_fabricante_modelo, localizacao, locacao, status, tag_patrimonio, observacao) VALUES ('$numero_serie', '$descricao_fabricante_modelo', '$localizacao','$locacao', $status, '$tag_patrimonio','$observacao')";
+            $sql = "INSERT INTO patrimonio (numero_serie, descricao_fabricante_modelo, localizacao, locacao, status, observacao) VALUES ('$numero_serie', '$descricao_fabricante_modelo', '$localizacao','$locacao', $status,'$observacao')";
 
             if ($conn->query($sql) === TRUE) {
                 $cadastro_sucesso = "Cadastro realizado com sucesso!";
             } else {
-                $cadastro_sucesso = "Algo de errado aconteceu com o cadastro";
+                $cadastro_error = "Algo de errado aconteceu com o cadastro: ".$conn->error;
             }
 
 
@@ -75,7 +75,12 @@
                       echo "<div class='w3-container w3-center w3-green'>";
                       echo $cadastro_sucesso;
                       echo "</div>";
+                      }elseif(isset($cadastro_error)){
+                          echo "<div class='w3-container w3-center w3-red'>";
+                          echo $cadastro_error;
+                          echo "</div>";
                       }
+
                 ?>
                 <h2 style="text-align:center">Cadastro Permanente</h2>
                 <form class="w3-container" action="cadastro_permanente.php" method="post">
@@ -94,9 +99,7 @@
                             <option value="0">Ocioso</option>
                             <option value="3">Interditado</option>
                         </select>
-                        
-                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Tag Patrimônio" name="tag_patrimonio" required>
-                        
+
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Observação" name="observacao" required>
                         
                         <button class="w3-btn-block w3-section w3-padding button button1" type="submit">Cadastrar</button>
